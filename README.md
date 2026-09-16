@@ -42,26 +42,41 @@ cp .env.example .env.local
 ## 3. Set up the database
 
 In your Supabase project's SQL editor, run the contents of
-`supabase/schema.sql`. This creates the `news_posts` table with the right
-read/write permissions.
+`supabase/schema.sql`. This creates all five tables — `site_settings`,
+`news_posts`, `team_members`, `how_it_works_steps`, and `faq_items` —
+with public read and authenticated-only write. The script is safe to
+re-run if you pull updates later.
 
 Then, in Supabase → Authentication → Users, create one user for
 yourself (email + password) — that's what you'll use to sign in at
 `/admin`.
 
-## 4. Update the placeholder content
+## 4. Edit the site from `/admin`
 
-A few spots are intentionally marked as placeholders for you to fill in
-with real details once you have them:
+Sign in at `/admin` and everything behind the sticky header is editable —
+no code changes, no redeploy. The dashboard is tabbed by site section:
 
-- `lib/newsData.ts` — fallback news items (shown until you add real
-  posts via `/admin/dashboard`)
-- `app/campus/page.tsx` — the "Deployment status" box
-- `app/investors/page.tsx` — the "Materials" links (pitch deck, press
-  kit) and current milestones
-- `components/Header.tsx` and `app/campus/page.tsx` /
-  `app/page.tsx` — the `PORTAL_URL` constant, pointing at your live
-  Tier 2 deployment
+| Tab | What you can edit |
+| --- | --- |
+| **Global** | The NODE server / portal link (every "Open the Portal" button), footer text, contact email |
+| **Home** | Hero headline and copy, the problem section, campus callout, stats box, "Built in the open" heading, closing CTA |
+| **How It Works** | Page headline and intro, the comparison lists, plus add/edit/reorder/delete the numbered steps |
+| **For Campus** | Headline, intro, deployment status text and figures, plus add/edit/reorder/delete FAQs |
+| **For Investors** | Headline, opportunity and traction sections, traction figures, pitch deck and press kit links |
+| **News** | Page headings, plus post, edit, publish/unpublish, and delete updates |
+| **About & Team** | The story sections, "Elsewhere" links, plus add/edit/reorder/delete founder and team members |
+| **Contact** | Page headline and intro |
+
+Two conventions worth knowing:
+
+- **Figure boxes** (stats, deployment figures, traction metrics) take one
+  item per line as `Label | Value` — e.g. `Active users | 480`. Leave the
+  field blank to hide the box entirely.
+- **Link lists** take one per line as `Label | URL`.
+
+Anything left unsaved falls back to a sensible default, so the site never
+renders blank. Changes appear within about a minute (pages revalidate on a
+60-second window).
 
 ## 5. Deploy
 

@@ -1,5 +1,6 @@
 import { supabase, type TeamMemberRow } from "@/lib/supabaseClient";
 import { TEAM_MEMBERS, type TeamMember } from "@/lib/teamData";
+import { getSettings, toPairs } from "@/lib/siteContent";
 
 export const revalidate = 60;
 
@@ -32,21 +33,18 @@ function initials(name: string) {
 }
 
 export default async function AboutPage() {
-  const team = await getTeam();
+  const [team, settings] = await Promise.all([getTeam(), getSettings()]);
+  const links = toPairs(settings.about_links);
 
   return (
     <>
       <section className="bg-paper">
         <div className="container-page py-16 md:py-20">
           <h1 className="max-w-2xl font-display text-4xl font-semibold leading-tight text-navy md:text-5xl">
-            Why NODE exists
+            {settings.about_title}
           </h1>
           <p className="mt-5 max-w-xl font-body text-base leading-relaxed text-ink/75">
-            NODE is built by Quadri Marvellous Al-ameen, a self-taught
-            full-stack developer and physics educator based in Lagos,
-            Nigeria — and part of the Quadri Marvellous Initiative, a group
-            of civic-tech and infrastructure projects built for
-            low-connectivity environments.
+            {settings.about_intro}
           </p>
         </div>
       </section>
@@ -55,26 +53,18 @@ export default async function AboutPage() {
         <div className="container-page grid gap-10 py-16 md:grid-cols-2 md:py-20">
           <div>
             <h2 className="font-display text-2xl font-semibold text-navy">
-              From the classroom
+              {settings.about_story_heading}
             </h2>
             <p className="mt-4 font-body text-base leading-relaxed text-ink/75">
-              Before building software, Marvellous taught physics. That
-              vantage point — watching lessons stall because a page
-              wouldn&apos;t load, or resources being unreachable at the
-              exact moment students needed them — is what shaped NODE&apos;s
-              starting premise: build for the disconnected moment, not
-              around it.
+              {settings.about_story_body}
             </p>
           </div>
           <div>
             <h2 className="font-display text-2xl font-semibold text-navy">
-              A wider initiative
+              {settings.about_initiative_heading}
             </h2>
             <p className="mt-4 font-body text-base leading-relaxed text-ink/75">
-              NODE is one project under the Quadri Marvellous Initiative,
-              alongside other civic-tech tools aimed at making
-              infrastructure work in low-connectivity conditions rather
-              than assuming them away.
+              {settings.about_initiative_body}
             </p>
           </div>
         </div>
@@ -125,26 +115,18 @@ export default async function AboutPage() {
             Elsewhere
           </h2>
           <ul className="mt-6 space-y-3 font-body text-sm">
-            <li>
-              <a
-                href="https://marvellous-dev-portfolio.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue hover:text-navy"
-              >
-                Portfolio
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://quadrimarvellous.substack.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue hover:text-navy"
-              >
-                Writing on Substack
-              </a>
-            </li>
+            {links.map((link) => (
+              <li key={link.value}>
+                <a
+                  href={link.value}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue hover:text-navy"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </section>

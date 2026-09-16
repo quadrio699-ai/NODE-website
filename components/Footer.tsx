@@ -1,15 +1,17 @@
 import Link from "next/link";
+import { getSettings, toPairs } from "@/lib/siteContent";
 
-export default function Footer() {
+export default async function Footer() {
+  const settings = await getSettings();
+  const aboutLinks = toPairs(settings.about_links);
+
   return (
     <footer className="bg-navy text-white/80">
       <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <span className="font-display text-lg font-medium text-white">NODE</span>
           <p className="mt-3 max-w-xs font-body text-sm leading-relaxed text-white/60">
-            Network of Digital Equity — a decentralized, offline-first server
-            bringing learning materials to campuses with unreliable
-            connectivity, starting at LASU.
+            {settings.footer_blurb}
           </p>
         </div>
 
@@ -32,16 +34,18 @@ export default function Footer() {
           <ul className="mt-4 space-y-2.5 font-body text-sm">
             <li><Link href="/about" className="hover:text-white">About the Builder</Link></li>
             <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-            <li>
-              <a
-                href="https://quadrimarvellous.substack.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white"
-              >
-                Substack Writing
-              </a>
-            </li>
+            {aboutLinks.map((link) => (
+              <li key={link.value}>
+                <a
+                  href={link.value}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

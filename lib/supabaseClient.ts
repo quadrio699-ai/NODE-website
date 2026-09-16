@@ -26,3 +26,19 @@ export type TeamMemberRow = {
   display_order: number;
   created_at: string;
 };
+
+export type StepRow = {
+  id: string;
+  title: string;
+  body: string;
+  display_order: number;
+  created_at: string;
+};
+
+export type FaqRow = {
+  id: string;
+  question: string;
+  answer: string;
+  display_order: number;
+  created_at: string;
+};

@@ -1,5 +1,6 @@
 import { supabase, type NewsPostRow } from "@/lib/supabaseClient";
 import { NEWS_ITEMS, type NewsItem } from "@/lib/newsData";
+import { getSettings } from "@/lib/siteContent";
 
 export const revalidate = 60;
 
@@ -27,17 +28,16 @@ async function getNews(): Promise<NewsItem[]> {
 }
 
 export default async function NewsPage() {
-  const items = await getNews();
+  const [items, settings] = await Promise.all([getNews(), getSettings()]);
 
   return (
     <section className="bg-paper">
       <div className="container-page py-16 md:py-20">
         <h1 className="font-display text-4xl font-semibold text-navy md:text-5xl">
-          Updates
+          {settings.news_title}
         </h1>
         <p className="mt-4 max-w-xl font-body text-base leading-relaxed text-ink/75">
-          Milestones, deployments, and progress on NODE, posted as they
-          happen.
+          {settings.news_intro}
         </p>
 
         <div className="mt-12 divide-y divide-line border-t border-line">
