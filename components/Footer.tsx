@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { getSettings, toPairs } from "@/lib/siteContent";
+import SocialLinks from "@/components/SocialLinks";
 
 export default async function Footer() {
   const settings = await getSettings();
   const aboutLinks = toPairs(settings.about_links);
+  const socialLinks = toPairs(settings.social_links);
 
   return (
     <footer className="bg-navy text-white/80">
@@ -13,6 +15,7 @@ export default async function Footer() {
           <p className="mt-3 max-w-xs font-body text-sm leading-relaxed text-white/60">
             {settings.footer_blurb}
           </p>
+            <SocialLinks links={socialLinks} className="mt-5" />
         </div>
 
         <div>
