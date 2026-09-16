@@ -57,8 +57,7 @@ export default function SocialLinks({
   return (
     <div className={["flex items-center gap-3", className].filter(Boolean).join(" ")}>
       {links.map((link) => (
-        
-          key={link.label}
+         <a>key={link.label}
           href={link.value}
           target="_blank"
           rel="noopener noreferrer"
