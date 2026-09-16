@@ -40,6 +40,13 @@ export const SETTINGS_GROUPS: SettingsGroup[] = [
         default:
           "Network of Digital Equity — a decentralized, offline-first server bringing learning materials to campuses with unreliable connectivity, starting at LASU.",
       },
+            {
+        key: "social_links",
+        label: "Social links",
+        type: "lines",
+        help: "One per line, as 'Label | URL'. Recognized labels (Instagram, X, LinkedIn) get their icon automatically — anything else gets a plain link icon. Leave blank to hide the row.",
+        default: "",
+      },
       {
         key: "contact_email",
         label: "Contact email",
