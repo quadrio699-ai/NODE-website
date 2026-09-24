@@ -5,6 +5,27 @@ import { supabase, type NewsPostRow } from "@/lib/supabaseClient";
 import { getSettings, toPairs } from "@/lib/siteContent";
 import { DEFAULT_STEPS, getSteps } from "@/lib/stepsData";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://node-website-mu.vercel.app";
+
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "NODE — Network of Digital Equity",
+      url: SITE_URL,
+      logo: `${SITE_URL}/icon.png`,
+      description:
+        "NODE is a decentralized, offline-first server that keeps learning materials available on campuses with unreliable connectivity.",
+    },
+    {
+      "@type": "WebSite",
+      name: "NODE",
+      url: SITE_URL,
+    },
+  ],
+};
+
 export const revalidate = 60;
 
 async function getRecentNews() {
@@ -39,6 +60,10 @@ export default async function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-paper">
         <div className="container-page grid items-center gap-12 py-20 md:grid-cols-2 md:py-28">
