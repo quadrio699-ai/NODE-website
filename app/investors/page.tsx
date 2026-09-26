@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getSettings, toPairs } from "@/lib/siteContent";
 
 export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+
+  return {
+    title: settings.seo_investors_title,
+    description: settings.seo_investors_description,
+  };
+}
 
 export default async function InvestorsPage() {
   const settings = await getSettings();
