@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import NetworkPattern from "@/components/NetworkPattern";
 import { NEWS_ITEMS } from "@/lib/newsData";
@@ -6,6 +7,15 @@ import { getSettings, toPairs } from "@/lib/siteContent";
 import { DEFAULT_STEPS, getSteps } from "@/lib/stepsData";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://node-website-mu.vercel.app";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+
+  return {
+    title: settings.seo_home_title,
+    description: settings.seo_home_description,
+  };
+}
 
 const JSON_LD = {
   "@context": "https://schema.org",
