@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getSettings, toLines } from "@/lib/siteContent";
 import { getSteps } from "@/lib/stepsData";
 
 export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+
+  return {
+    title: settings.seo_how_title,
+    description: settings.seo_how_description,
+  };
+}
 
 export default async function HowItWorksPage() {
   const [settings, steps] = await Promise.all([getSettings(), getSteps()]);
