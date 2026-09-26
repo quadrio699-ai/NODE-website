@@ -413,6 +413,124 @@ export const SETTINGS_GROUPS: SettingsGroup[] = [
       },
     ],
   },
+    {
+    id: "seo",
+    label: "SEO",
+    description:
+      "Search engine settings for the homepage and individual pages.",
+    fields: [
+      {
+        key: "seo_site_title",
+        label: "Site title",
+        type: "text",
+        help: "The main title Google and social platforms can use for NODE.",
+        default: "NODE — Network of Digital Equity",
+      },
+      {
+        key: "seo_site_description",
+        label: "Site description",
+        type: "textarea",
+        help: "A short description of NODE for search engines and social sharing.",
+        default:
+          "Project NODE is a decentralized, offline-first student server that keeps educational materials available on campuses when internet connectivity is unreliable.",
+      },
+      {
+        key: "seo_home_title",
+        label: "Home page title",
+        type: "text",
+        default:
+          "NODE — Offline-First Student Server for Campus Learning",
+      },
+      {
+        key: "seo_home_description",
+        label: "Home page description",
+        type: "textarea",
+        default:
+          "Project NODE is a decentralized, offline-first student server that keeps educational materials available on campus when internet connectivity is unreliable.",
+      },
+      {
+        key: "seo_how_title",
+        label: "How It Works title",
+        type: "text",
+        default: "How NODE Works — Offline-First Learning Infrastructure",
+      },
+      {
+        key: "seo_how_description",
+        label: "How It Works description",
+        type: "textarea",
+        default:
+          "Learn how Project NODE stores educational content locally, serves students over a campus network, and synchronizes with the internet when connectivity returns.",
+      },
+      {
+        key: "seo_campus_title",
+        label: "For Campus title",
+        type: "text",
+        default:
+          "NODE for Campuses — Reliable Learning Without Constant Internet",
+      },
+      {
+        key: "seo_campus_description",
+        label: "For Campus description",
+        type: "textarea",
+        default:
+          "See how Project NODE helps students access course materials and campus resources locally, even when internet connectivity is unreliable.",
+      },
+      {
+        key: "seo_investors_title",
+        label: "For Investors title",
+        type: "text",
+        default:
+          "Project NODE — Digital Infrastructure for Low-Connectivity Environments",
+      },
+      {
+        key: "seo_investors_description",
+        label: "For Investors description",
+        type: "textarea",
+        default:
+          "Explore Project NODE's offline-first infrastructure, campus deployment, partnerships and plans for expanding reliable digital access.",
+      },
+      {
+        key: "seo_news_title",
+        label: "News title",
+        type: "text",
+        default: "NODE News & Updates — Project Progress and Deployments",
+      },
+      {
+        key: "seo_news_description",
+        label: "News description",
+        type: "textarea",
+        default:
+          "Follow Project NODE's deployments, milestones, partnerships, announcements and progress toward more reliable digital access for students.",
+      },
+      {
+        key: "seo_about_title",
+        label: "About title",
+        type: "text",
+        default: "About Project NODE — Network of Digital Equity",
+      },
+      {
+        key: "seo_about_description",
+        label: "About description",
+        type: "textarea",
+        default:
+          "Learn why Project NODE was created, the problem it addresses, and the people building an offline-first approach to educational access.",
+      },
+      {
+        key: "seo_contact_title",
+        label: "Contact title",
+        type: "text",
+        default:
+          "Contact Project NODE — Partnerships, Press & Inquiries",
+      },
+      {
+        key: "seo_contact_description",
+        label: "Contact description",
+        type: "textarea",
+        default:
+          "Contact Project NODE about campus partnerships, press inquiries, deployments, collaboration and opportunities to support the project.",
+      },
+    ],
+  },
 ];
 
 export const ALL_FIELDS: FieldDef[] = SETTINGS_GROUPS.flatMap((g) => g.fields);
