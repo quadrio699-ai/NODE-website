@@ -17,6 +17,7 @@ const TABS = [
   { id: "news", label: "News" },
   { id: "about", label: "About & Team" },
   { id: "contact", label: "Contact" },
+  { id: "seo", label: "SEO" },
 ];
 
 export default function AdminDashboardPage() {
