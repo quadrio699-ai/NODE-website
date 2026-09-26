@@ -5,7 +5,6 @@ import { NEWS_ITEMS } from "@/lib/newsData";
 import { supabase, type NewsPostRow } from "@/lib/supabaseClient";
 import { getSettings, toPairs } from "@/lib/siteContent";
 import { DEFAULT_STEPS, getSteps } from "@/lib/stepsData";
-import Linkify from "@/components/Linkify";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://node-website-mu.vercel.app";
 
@@ -221,7 +220,7 @@ export default async function HomePage() {
                   {item.title}
                 </h3>
                 <p className="mt-2 font-body text-sm leading-relaxed text-ink/70">
-                <Linkify text={item.summary} />
+                  {item.summary}
                 </p>
               </article>
             ))}
