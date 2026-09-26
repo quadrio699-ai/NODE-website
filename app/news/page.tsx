@@ -5,6 +5,28 @@ import { getSettings } from "@/lib/siteContent";
 
 export const revalidate = 60;
 
+function renderSummary(text: string) {
+  const parts = text.split(/(https?:\/\/[^\s]+)/g);
+
+  return parts.map((part, index) => {
+    if (/^https?:\/\//.test(part)) {
+      return (
+        <a
+          key={index}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue underline hover:text-navy"
+        >
+          Read the full story
+        </a>
+      );
+    }
+
+    return <span key={index}>{part}</span>;
+  });
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings();
 
@@ -59,7 +81,7 @@ export default async function NewsPage() {
                   {item.title}
                 </h2>
                 <p className="mt-2 max-w-2xl font-body text-base leading-relaxed text-ink/70">
-                    {item.summary}
+                   {renderSummary(item.summary)}
                 </p>
               </div>
             </article>
