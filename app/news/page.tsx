@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import { supabase, type NewsPostRow } from "@/lib/supabaseClient";
 import { NEWS_ITEMS, type NewsItem } from "@/lib/newsData";
 import { getSettings } from "@/lib/siteContent";
 
 export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+
+  return {
+    title: settings.seo_news_title,
+    description: settings.seo_news_description,
+  };
+}
 
 async function getNews(): Promise<NewsItem[]> {
   if (!supabase) return NEWS_ITEMS;
