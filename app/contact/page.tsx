@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import { getSettings } from "@/lib/siteContent";
 
 export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+
+  return {
+    title: settings.seo_contact_title,
+    description: settings.seo_contact_description,
+  };
+}
 
 export default async function ContactPage() {
   const settings = await getSettings();
