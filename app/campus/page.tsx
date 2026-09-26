@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { getSettings, toPairs } from "@/lib/siteContent";
 import { getFaqs } from "@/lib/stepsData";
 
 export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+
+  return {
+    title: settings.seo_campus_title,
+    description: settings.seo_campus_description,
+  };
+}
 
 export default async function CampusPage() {
   const [settings, faqs] = await Promise.all([getSettings(), getFaqs()]);
