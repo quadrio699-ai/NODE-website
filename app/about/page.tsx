@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import { supabase, type TeamMemberRow } from "@/lib/supabaseClient";
 import { TEAM_MEMBERS, type TeamMember } from "@/lib/teamData";
 import { getSettings, toPairs } from "@/lib/siteContent";
 
 export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSettings();
+
+  return {
+    title: settings.seo_about_title,
+    description: settings.seo_about_description,
+  };
+}
 
 async function getTeam(): Promise<TeamMember[]> {
   if (!supabase) return TEAM_MEMBERS;
