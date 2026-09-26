@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { supabase, type NewsPostRow } from "@/lib/supabaseClient";
 import { NEWS_ITEMS, type NewsItem } from "@/lib/newsData";
 import { getSettings } from "@/lib/siteContent";
+import Linkify from "@/components/Linkify";
 
 export const revalidate = 60;
 
@@ -59,7 +60,7 @@ export default async function NewsPage() {
                   {item.title}
                 </h2>
                 <p className="mt-2 max-w-2xl font-body text-base leading-relaxed text-ink/70">
-                  {item.summary}
+                  <Linkify text={item.summary} />
                 </p>
               </div>
             </article>
