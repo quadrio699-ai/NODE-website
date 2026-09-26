@@ -17,25 +17,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const JSON_LD = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      name: "NODE — Network of Digital Equity",
-      url: SITE_URL,
-      logo: `${SITE_URL}/icon.png`,
-      description:
-        "NODE is a decentralized, offline-first server that keeps learning materials available on campuses with unreliable connectivity.",
-    },
-    {
-      "@type": "WebSite",
-      name: "NODE",
-      url: SITE_URL,
-    },
-  ],
-};
-
 export const revalidate = 60;
 
 async function getRecentNews() {
@@ -65,6 +46,25 @@ export default async function HomePage() {
     getRecentNews(),
     getSteps(),
   ]);
+    const JSON_LD = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "NODE — Network of Digital Equity",
+        alternateName: "NODE",
+        url: SITE_URL,
+        logo: `${SITE_URL}/icon.png`,
+        description: settings.seo_site_description,
+      },
+      {
+        "@type": "WebSite",
+        name: "NODE",
+        url: SITE_URL,
+        description: settings.seo_site_description,
+      },
+    ],
+  };
   const stats = toPairs(settings.home_stats);
   const topSteps = (steps.length > 0 ? steps : DEFAULT_STEPS).slice(0, 3);
 
