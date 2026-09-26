@@ -119,9 +119,10 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-paper">
-        <div className="container-page py-16 md:py-20">
-          <h2 className="font-display text-2xl font-semibold text-navy">
+         {links.length > 0 && (
+        <section className="bg-paper">
+          <div className="container-page py-16 md:py-20">
+            <h2 className="font-display text-2xl font-semibold text-navy">
             Elsewhere
           </h2>
           <ul className="mt-6 space-y-3 font-body text-sm">
@@ -137,9 +138,10 @@ export default async function AboutPage() {
                 </a>
               </li>
             ))}
-          </ul>
-        </div>
-      </section>
+                   </ul>
+          </div>
+        </section>
+      )}
     </>
   );
 }
